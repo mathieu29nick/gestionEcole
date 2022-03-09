@@ -7,6 +7,7 @@ alter database ecole owner to ecole;
 -- Create a new relational table
 CREATE TABLE Secretaire(
     id SERIAL NOT NULL PRIMARY KEY,
+    nom VARCHAR(250) NOT NULL,
     numSecretaire VARCHAR(250)NOT NULL,
     mdp VARCHAR(250) NOT NULL
 );
