@@ -27,7 +27,7 @@
                             <option value="">Niveau</option>
                         </optgroup>
                     </select>
-                    <button class="btn btn-primary" type="submit" style="background: rgb(235, 59, 96);border-color: var(--pink);">OK</button>
+                    <button class="btn btn-primary" type="submit" style="background: rgb(235, 59, 96);">OK</button>
                 </div>
             </nav>
         </form>
@@ -57,7 +57,7 @@
                 </tbody>
             </table>
         </div>
-        <a href="accueil_admin.jsp"><button class="btn btn-primary" type="button" style="width: 100.5px;margin-left: 1010px;border-color: var(--pink);background: rgb(235, 59, 96);">&lt;&lt; BACK</button></a>
+        <a href="accueil_admin.jsp"><button class="btn btn-primary" type="button" style="width: 100.5px;margin-left: 1010px;background: rgb(235, 59, 96);">&lt;&lt; BACK</button></a>
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
