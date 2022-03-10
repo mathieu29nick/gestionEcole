@@ -42,19 +42,10 @@ public class ServletInsertionNotes extends HttpServlet {
         String note = request.getParameter("note");
         String numExam = request.getParameter("numExam");
         
+        FunctionMahefa fonction = new FunctionMahefa();
+        fonction.insertionNotes(num, matiere, note, numExam);
         RequestDispatcher dispat = request.getRequestDispatcher("pageProfesseur.jsp");
         dispat.forward(request, response);
-        
-        try {
-            FunctionMahefa fonction = new FunctionMahefa();
-            fonction.insertionNotes(num, matiere, note, numExam);
-                
-        
-            RequestDispatcher dispat = request.getRequestDispatcher("pageProfesseur.jsp");
-            dispat.forward(request, response);
-        } catch (ParseException | SQLException ex) {
-            Logger.getLogger(ServletInsertionNotes.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
