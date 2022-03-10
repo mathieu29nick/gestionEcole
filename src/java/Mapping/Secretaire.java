@@ -1,4 +1,4 @@
-package mapping;
+package Mapping;
 
 public class Secretaire {
     private Integer id;

@@ -5,8 +5,15 @@
  */
 package Servlet;
 
+import Mapping.DetailEtudiant;
+import Mapping.Matiere;
+import Mapping.Niveau;
+import function.FunctionMahefa;
 import javax.servlet.RequestDispatcher;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.Vector;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,9 +41,23 @@ public class ServletInsertionNotes extends HttpServlet {
         String matiere = request.getParameter("matiere");
         String note = request.getParameter("note");
         String numExam = request.getParameter("numExam");
+        FunctionMahefa fonction = new FunctionMahefa();
+            try {
+                Vector<Matiere> liste = fonction.getListeMatiere();
+                Vector<Niveau> niveau = fonction.getListeNiveau();
+                Vector<DetailEtudiant> etudiant = fonction.getListeEtudiant1();
+                request.setAttribute("liste", liste);
+                request.setAttribute("niveaux", niveau);
+                request.setAttribute("etudiants", etudiant);
+            
+            fonction.insertionNotes(num, matiere, note, numExam);
+
+            RequestDispatcher dispat = request.getRequestDispatcher("pageProfesseur.jsp");
+            dispat.forward(request, response);
+        } catch (IOException | SQLException | ParseException | ServletException e) {
+        }
         
-        RequestDispatcher dispat = request.getRequestDispatcher("insertion_notes.jsp");
-        dispat.forward(request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

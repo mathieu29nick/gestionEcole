@@ -1,4 +1,4 @@
-package mapping;
+package Mapping;
 
 public class Promotion {
     private Integer id;

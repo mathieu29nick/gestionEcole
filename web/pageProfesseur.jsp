@@ -1,3 +1,11 @@
+<%@page import="Mapping.DetailEtudiant"%>
+<%@page import="Mapping.Matiere"%>
+<%@page import="java.util.Vector" %>
+<% Vector<Matiere> listes = (Vector<Matiere>)request.getAttribute("liste"); %>
+<% Vector<DetailEtudiant> etudiant = (Vector<DetailEtudiant>)request.getAttribute("etudiants"); %>
+<% request.setAttribute("listes", listes); %>
+<% request.setAttribute("etudiant", etudiant); %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,17 +32,20 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <% for(int i=0; i<etudiant.size(); i++) { 
+                                DetailEtudiant etudiant_det = (DetailEtudiant)etudiant.elementAt(i);
+                            %>
                             <tr>
-                                <td style="text-align: center;">Cell 1</td>
-                                <td style="text-align: center;">Cell 2</td>
-                            </tr>
-                            <tr></tr>
+                                <td style="text-align: center;"><% out.print(etudiant_det.getNumEtu()); %></td>
+                                <td style="text-align: center;"><% out.print(etudiant_det.getNom()); %></td>
+                             </tr>
+                        <% } %>
                         </tbody>
                     </table>
                 </div>
                 <a href="index.jsp"><button class="btn btn-primary" type="button" style="width: 100.5px;margin-top: 88px;">&lt;&lt; BACK</button></a>
             </form>
-            <form method="post" action="ServletInsertionNotes">
+                        <form method="post" action="ServletInsertionNotes">
                 <p style="width: 125px;margin-left: -50px;">Numero ETU</p>
                 <p style="width: 125px;margin-left: -50px;">Matiere</p>
                 <p style="width: 125px;margin-left: -50px;">Notes</p>
@@ -42,7 +53,11 @@
                 <input class="form-control" type="text" style="width: 200px;margin-left: 80px;margin-top: -169px;" name="num" required>
                 <select class="form-control" style="width: 200px;margin-left: 80px;" name="matiere">
                     <optgroup label="Matiere">
-                        <option value="">Matiere</option>
+                        <% for(int i=0; i<listes.size(); i++) { 
+                            Matiere m = (Matiere)listes.elementAt(i);
+                        %>
+                        <option value="<% out.print(m.getNom()); %>"><% out.print(m.getNom()); %></option>
+                        <% } %>
                     </optgroup>
                 </select>
                 <input class="form-control" type="text" style="width: 200px;margin-left: 80px;" name="note" required>
