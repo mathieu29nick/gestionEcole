@@ -45,7 +45,7 @@ public class ElementDB extends DBconnexion {
         String sql = "select "+ column + " from " + table;
         if(join!=null || join!="") sql+= " " + join;
         if(where!="") sql+= " where" + where;
-        //System.out.println(sql);
+        System.out.println(sql);
         
         try {
             Connection con =connection(); 

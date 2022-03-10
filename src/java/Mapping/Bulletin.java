@@ -1,4 +1,4 @@
-package mapping;
+package Mapping;
 
 public class Bulletin {
     private Integer id;

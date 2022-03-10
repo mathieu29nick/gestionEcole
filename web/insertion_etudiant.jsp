@@ -55,7 +55,7 @@
                     </div>
                 <% } %>
             </form>
-            <a href="accueil_admin.jsp"><button class="btn btn-primary" type="button" style="margin-top: 372px;margin-right: 0px;margin-left: -811px;width: 130.5px;background: rgb(244, 71, 107);height: 46px;">&lt;&lt; BACK</button></a>
+            <a href="pageAdmin.jsp"><button class="btn btn-primary" type="button" style="margin-top: 372px;margin-right: 0px;margin-left: -811px;width: 130.5px;background: rgb(244, 71, 107);height: 46px;">&lt;&lt; BACK</button></a>
            
         </div>
     </section>

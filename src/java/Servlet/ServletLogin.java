@@ -5,12 +5,21 @@
  */
 package Servlet;
 
+import Mapping.DetailEtudiant;
+import function.FunctionMahefa;
 import javax.servlet.RequestDispatcher;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Vector;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import Mapping.Matiere;
+import Mapping.Niveau;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,11 +37,13 @@ public class ServletLogin extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         String nom = request.getParameter("nom");
         String pass = request.getParameter("password");
         String role = request.getParameter("role");
+        
+        
         if(role == null) {
             String erreur = "Veuillez compléter toutes les informations";
             request.setAttribute("error", erreur);
@@ -40,18 +51,29 @@ public class ServletLogin extends HttpServlet {
             dispat.forward(request, response);
         }
         else {
-            if(role.equalsIgnoreCase("admin")) {
-                RequestDispatcher dispat = request.getRequestDispatcher("accueil_admin.jsp");
+            FunctionMahefa fonction = new FunctionMahefa();
+            try {
+                Vector<Matiere> liste = fonction.getListeMatiere();
+                Vector<Niveau> niveau = fonction.getListeNiveau();
+                Vector<DetailEtudiant> etudiant = fonction.getListeEtudiant1();
+                request.setAttribute("liste", liste);
+                request.setAttribute("niveaux", niveau);
+                request.setAttribute("etudiants", etudiant);
+            
+                String page = fonction.getPageAcceuil(nom, pass, role)+".jsp";
+                
+                RequestDispatcher dispat = request.getRequestDispatcher(page);
+                
+                dispat.forward(request, response);
+                
+
+            } catch (SQLException ex) {
+                String erreur = "Mot de passe ou email invalide";
+                request.setAttribute("error", erreur);
+                RequestDispatcher dispat = request.getRequestDispatcher("index.jsp");
                 dispat.forward(request, response);
             }
-            else if(role.equalsIgnoreCase("professeur")) {
-                RequestDispatcher dispat = request.getRequestDispatcher("insertion_notes.jsp");
-                dispat.forward(request, response);
-            }
-            else {
-                RequestDispatcher dispat = request.getRequestDispatcher("payement_ecolage.jsp");
-                dispat.forward(request, response);
-            }
+                 
         }
     }
 
@@ -67,7 +89,11 @@ public class ServletLogin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(ServletLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -81,7 +107,11 @@ public class ServletLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(ServletLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

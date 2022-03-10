@@ -21,15 +21,15 @@
                 <input class="form-control" type="text" name="nom" placeholder="Email" required>
                 <input class="form-control" type="password" name="password" placeholder="Password" style="margin-top: 10px;" required>
                 <div class="form-check" style="margin-top: 10px;">
-                    <input class="form-check-input" type="radio" id="formCheck-1" value="admin" name="role">
+                    <input class="form-check-input" type="radio" id="formCheck-1" value="Admin" name="role">
                     <label class="form-check-label" for="formCheck-1" style="margin-top: 0px;">Admin</label>
                 </div>
                 <div class="form-check" style="margin-top: 10px;">
-                    <input class="form-check-input" type="radio" id="formCheck-2" value="professeur" name="role">
+                    <input class="form-check-input" type="radio" id="formCheck-2" value="Professeur" name="role">
                     <label class="form-check-label" for="formCheck-2">Professeur</label>
                 </div>
                 <div class="form-check" style="margin-top: 10px;">
-                    <input class="form-check-input" type="radio" id="formCheck-3" value="secretaire" name="role">
+                    <input class="form-check-input" type="radio" id="formCheck-3" value="Secretaire" name="role">
                     <label class="form-check-label" for="formCheck-3">Secretaire</label>
                 </div>
                 <button class="btn btn-primary btn-block" type="submit">Valider</button>

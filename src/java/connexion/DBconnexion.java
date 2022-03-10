@@ -16,7 +16,7 @@ public class DBconnexion {
             //System.out.println("connecter");
             return con;
         } catch (Exception e) {
-            System.out.println("erreur de connexion");
+            System.out.println(e.getMessage());
             return null;
         }
     }

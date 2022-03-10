@@ -58,7 +58,7 @@
                 </tbody>
             </table>
         </div>
-        <a href="accueil_admin.jsp"><button class="btn btn-primary" type="button" style="margin-top: 100px;margin-left: 950px;background: rgb(235, 59, 96);border-color: rgb(235, 59, 96);">&lt;&lt; BACK</button></a>
+        <a href="pageAdmin.jsp"><button class="btn btn-primary" type="button" style="margin-top: 100px;margin-left: 950px;background: rgb(235, 59, 96);border-color: rgb(235, 59, 96);">&lt;&lt; BACK</button></a>
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>

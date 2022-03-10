@@ -1,4 +1,4 @@
-package mapping;
+package Mapping;
 
 import java.util.Date;
 
@@ -11,9 +11,10 @@ public class Etudiants {
     private Date dateInscription;
     private Integer sexe;
     private String adresse;
+    private Integer idProm;
 
 
-    public Etudiants(Integer id, String nom, Integer idNiveau, Date date_naissance, String numETU, Date dateInscription, Integer sexe, String adresse) {
+    public Etudiants(Integer id, String nom, Integer idNiveau, Date date_naissance, String numETU, Date dateInscription, Integer sexe, String adresse, Integer idProm) {
         this.id = id;
         this.nom = nom;
         this.idNiveau = idNiveau;
@@ -22,7 +23,17 @@ public class Etudiants {
         this.dateInscription = dateInscription;
         this.sexe = sexe;
         this.adresse = adresse;
+        this.idProm = idProm;
     }
+
+    public Integer getIdProm() {
+        return idProm;
+    }
+
+    public void setIdProm(Integer idProm) {
+        this.idProm = idProm;
+    }
+    
 
     public Integer getId() {
         return this.id;

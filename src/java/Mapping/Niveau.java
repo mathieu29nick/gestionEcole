@@ -1,4 +1,4 @@
-package mapping;
+package Mapping;
 
 public class Niveau {
     private Integer id;
