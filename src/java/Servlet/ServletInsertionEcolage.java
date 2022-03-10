@@ -36,7 +36,7 @@ public class ServletInsertionEcolage extends HttpServlet {
         String date = request.getParameter("date");
         String niveau = request.getParameter("niveau");
         
-        RequestDispatcher dispat = request.getRequestDispatcher("payement_ecolage.jsp");
+        RequestDispatcher dispat = request.getRequestDispatcher("pageSecretaire.jsp");
         dispat.forward(request, response);
     }
 

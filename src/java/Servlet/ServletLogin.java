@@ -41,15 +41,15 @@ public class ServletLogin extends HttpServlet {
         }
         else {
             if(role.equalsIgnoreCase("admin")) {
-                RequestDispatcher dispat = request.getRequestDispatcher("accueil_admin.jsp");
+                RequestDispatcher dispat = request.getRequestDispatcher("pageAdmin.jsp");
                 dispat.forward(request, response);
             }
             else if(role.equalsIgnoreCase("professeur")) {
-                RequestDispatcher dispat = request.getRequestDispatcher("insertion_notes.jsp");
+                RequestDispatcher dispat = request.getRequestDispatcher("pageProfesseur.jsp");
                 dispat.forward(request, response);
             }
             else {
-                RequestDispatcher dispat = request.getRequestDispatcher("payement_ecolage.jsp");
+                RequestDispatcher dispat = request.getRequestDispatcher("pageSecretaire.jsp");
                 dispat.forward(request, response);
             }
         }

@@ -35,7 +35,7 @@ public class ServletInsertionNotes extends HttpServlet {
         String note = request.getParameter("note");
         String numExam = request.getParameter("numExam");
         
-        RequestDispatcher dispat = request.getRequestDispatcher("insertion_notes.jsp");
+        RequestDispatcher dispat = request.getRequestDispatcher("pageProfesseur.jsp");
         dispat.forward(request, response);
     }
 
