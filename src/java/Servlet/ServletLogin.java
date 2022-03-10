@@ -5,8 +5,12 @@
  */
 package Servlet;
 
+import function.FunctionMahefa;
 import javax.servlet.RequestDispatcher;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,9 +30,10 @@ public class ServletLogin extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         String nom = request.getParameter("nom");
         String pass = request.getParameter("password");
@@ -50,11 +55,23 @@ public class ServletLogin extends HttpServlet {
             }
             else {
                 RequestDispatcher dispat = request.getRequestDispatcher("pageSecretaire.jsp");
+            try {
+                FunctionMahefa fonction = new FunctionMahefa();
+                String page = fonction.getPageAcceuil(nom, pass, role)+".jsp";
+                
+                RequestDispatcher dispat = request.getRequestDispatcher(page);
+                dispat.forward(request, response);
+            } catch (SQLException e) {
+                String erreur = "Email ou mot de passe errone";
+                request.setAttribute("error", erreur);
+                RequestDispatcher dispat = request.getRequestDispatcher("index.jsp");
                 dispat.forward(request, response);
             }
         }
     }
-
+    
+    
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -67,7 +84,11 @@ public class ServletLogin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ServletLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -81,7 +102,11 @@ public class ServletLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ServletLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
