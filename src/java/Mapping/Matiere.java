@@ -1,4 +1,4 @@
-package mapping;
+package Mapping;
 public class Matiere {
     private Integer id;
     private String nom;

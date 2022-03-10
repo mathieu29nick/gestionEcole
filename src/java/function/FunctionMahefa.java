@@ -5,7 +5,7 @@ import java.text.ParseException;
 import java.util.*;
 
 import connexion.ElementDB;
-import mapping.*;
+import Mapping.*;
 
 public class FunctionMahefa extends ElementDB {
     Integer I(String nb) {return Integer.parseInt(nb);}
@@ -23,7 +23,7 @@ public class FunctionMahefa extends ElementDB {
     public String getPageAcceuil(String nom,String mdp,String statut) throws SQLException {
         int log = login(nom, mdp, statut);
         if(log==1) return "page"+statut;
-        else return null;
+        else return "index";
     }
 
     public Vector<Matiere> getListeMatiere() {
@@ -72,15 +72,23 @@ public class FunctionMahefa extends ElementDB {
 
     public void insertionNotes(String numEtu, String matiere, String note, String numExam) throws ParseException, SQLException {
         try {
-            String idEtu = S(getIdEtudiant(numEtu));
+        String idEtu = S(getIdEtudiant(numEtu));
         System.out.println(idEtu);
         String idMat = S(getIdMatiere(matiere));
         String[] values = {"default",idEtu, idMat,note, dateNow(),numExam};
         if(idEtu!="" &&  idEtu!=null && idMat!="" && idMat!=null)
             insert("notes", values);
         } catch (Exception e) {
-            //TODO: handle exception
+            throw e;
         }
     }
+    
+    public Vector<DetailEtudiant> getListeEtudiant1() throws ParseException{
+        Vector<DetailEtudiant> res = new Vector<DetailEtudiant>();
+        String[][] all = selectAll("detailetudiant", "", "", 12);
+        for(int i=0;i<all.length;i++)
+             res.add(new DetailEtudiant(I(all[i][0]), all[i][1], D(all[i][2]), I(all[i][3]), all[i][4], I(all[i][5]), all[i][6],DATE(all[i][7]), all[i][8], DATE(all[i][9]), I(all[i][10]), all[i][11]));
+        return res;
+}
 
 }

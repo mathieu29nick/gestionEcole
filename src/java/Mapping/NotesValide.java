@@ -1,4 +1,4 @@
-package mapping;
+package Mapping;
 public class NotesValide {
     private Integer id;
     private Integer idNote;

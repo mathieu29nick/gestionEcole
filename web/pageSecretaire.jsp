@@ -1,4 +1,9 @@
+<%@page import="Mapping.DetailEtudiant"%>
 <%@page import="java.time.LocalDate" %>
+<%@page import="Mapping.Niveau" %>
+<%@page import="java.util.Vector" %>
+<% Vector<Niveau> niv = (Vector<Niveau>)request.getAttribute("niveaux"); %>
+<% Vector<DetailEtudiant> etudiant = (Vector<DetailEtudiant>)request.getAttribute("etudiants"); %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,11 +31,15 @@
                             </tr>
                         </thead>
                         <tbody>
+                           
+                        <% for(int i=0; i<etudiant.size(); i++) { 
+                             DetailEtudiant etudiant_det = (DetailEtudiant)etudiant.elementAt(i);
+                        %>
                             <tr>
-                                <td style="text-align: center;">Cell 1</td>
-                                <td style="text-align: center;">Cell 2</td>
-                            </tr>
-                            <tr></tr>
+                                <td style="text-align: center;"><% out.print(etudiant_det.getNumEtu()); %></td>
+                                <td style="text-align: center;"><% out.print(etudiant_det.getNom()); %></td>
+                             </tr>
+                        <% } %>
                         </tbody>
                     </table>
                 </div>
@@ -53,9 +62,11 @@
                 <input class="form-control" type="text" style="width: 200px;margin-left: 200px;" name="annee" required>
                 <input class="form-control" type="date" style="width: 200px;margin-left: 200px;" value="<% out.print(LocalDate.now()); %>" name="date">
                 <select class="form-control" style="width: 200px;margin-left: 200px;" name="niveau">
-                    <optgroup label="Mois">
-                        <% for(int i = 1; i <= 12; i++) { %>
-                            <option value="<% out.print(i); %>"><% out.print(i); %></option>
+                    <optgroup label="Niveau">
+                        <% for(int i = 1; i < niv.size(); i++) { 
+                            Niveau niveau = (Niveau)niv.elementAt(i);
+                        %>
+                            <option value="<% out.print(niveau.getNom()); %>"><% out.print(niveau.getNom()); %></option>
                         <% } %>
                     </optgroup>
                 </select>

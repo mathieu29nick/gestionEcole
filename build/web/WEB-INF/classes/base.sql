@@ -219,3 +219,38 @@ INSERT INTO NotesValide(idNote) VALUES(1);
 INSERT INTO Classement(nom, numETU, moyenne, merite, prom, niveau) VALUES('Rakoto Mamy', 'ETU001317', 15.2, 'merite', 'Prom13', 3);
 
 INSERT INTO EtatPayementEcolage(niveau, paye, reste, ecolage) VALUES(1,2000000, 200000, 2200000);
+
+CREATE OR REPLACE VIEW NoteNonValide as 
+SELECT niv.id as idNiv, niv.nom as nomNiv, p.id as idProm,
+p.nom as prom, m.id as idMat, m.nom as nomMat, m.coeff as coeff,
+n.id as idNote, n.note as note, n.date as date
+FROM Notes as n
+JOIN Etudiants as e
+ON e.id = n.idEtudiant
+JOIN Matiere as m
+ON m.id = n.idMatiere
+JOIN Promotion as p
+ON p.id = e.idProm
+JOIN Niveau as  niv
+ON niv.id = m.idNiveau
+WHERE n.id not in (SELECT idNote from NotesValide);
+
+CREATE OR REPLACE VIEW NoteValideMatiere as
+SELECT niv.id as idNiv, niv.nom as nomNiv, p.id as idProm,
+p.nom as prom, e.id as id, e.nom as nom, e.numETU as numETU,
+e.sexe as sexe, e.adresse as adresse, m.id as idMat, m.nom as nomMat,
+m.coeff as coeff, n.id as idNote, sum(n.note)/m.nombreExamen as total,
+n.date as date, nv.id as idNv
+FROM NotesValide as nv
+JOIN Notes as n
+ON n.id = nv.idNote
+JOIN Matiere as m
+ON n.idMatiere = m.id
+JOIN Etudiants as e
+ON e.id = n.idEtudiant
+JOIN Promotion as p
+ON p.id = e.idProm
+JOIN Niveau as niv
+ON niv.id = m.idNiveau
+GROUP BY e.id, e.nom, e.numETU, e.sexe, e.adresse, niv.id,
+niv.nom, p.id, p.nom, m.id, m.nom, m.coeff, m.coeff, n.id, n.date, nv.id;
